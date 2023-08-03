@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,16 +16,16 @@ public class TestovRegimTest {
         var registeredUser = DataGenerator.getRegisteredUser("active");
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
-        $("[data-test-id='action-login']").click();
-        $("h2").shouldHave(text("Личный кабинет"));
+        $("button.button").click();
+        $("h2").shouldHave(exactText("Личный кабинет")).shouldBe(visible);
     }
     @Test
     void shouldSuccessfulLoginIfNotRegisteredActiveUser(){
        var notRegisteredUser = DataGenerator.getUser("active");
         $("[data-test-id='login'] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
-        $("[data-test-id='action-login']").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
+        $("button.button").click();
+        $("[data-test-id=error-notification] .notification__content").shouldHave(exactText("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
     }
 
     @Test
@@ -34,7 +33,7 @@ public class TestovRegimTest {
         var blockerRegisteredUser = DataGenerator.getRegisteredUser("blocked");
         $("[data-test-id='login'] input").setValue(blockerRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(blockerRegisteredUser.getPassword());
-        $("[data-test-id='action-login']").click();
+        $("button.button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка! Пользователь заблокирован")).shouldBe(visible);
     }
     @Test
@@ -43,7 +42,7 @@ public class TestovRegimTest {
         var wrongPassword = DataGenerator.getRandomPassword();
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(wrongPassword);
-        $("[data-test-icd='action-login']").click();
+        $("button.button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
     }
 
@@ -53,7 +52,7 @@ public class TestovRegimTest {
         var wrongLogin = DataGenerator.getRandomLogin();
         $("[data-test-id='login'] input").setValue(wrongLogin);
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
-        $("[data-test-id='action-login']").click();
+        $("button.button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
     }
 }
