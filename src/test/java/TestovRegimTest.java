@@ -26,7 +26,7 @@ public class TestovRegimTest {
         $("[data-test-id='login'] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
         $("[data-test-id='action-login']").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
+        $("[data-test-id=error-notification]").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestovRegimTest {
         $("[data-test-id='login'] input").setValue(blockerRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(blockerRegisteredUser.getPassword());
         $("[data-test-id='action-login']").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка!Пользователь заблокирован")).shouldBe(visible);
+        $("[data-test-id=error-notification]").shouldHave(text("Ошибка!Пользователь заблокирован")).shouldBe(visible);
     }
     @Test
     void shouldSuccessfulLoginIfNoPassword(){
@@ -44,7 +44,7 @@ public class TestovRegimTest {
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(wrongPassword);
         $("[data-test-icd='action-login']").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
+        $("[data-test-id=error-notification]").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
     }
 
     @Test
@@ -54,6 +54,6 @@ public class TestovRegimTest {
         $("[data-test-id='login'] input").setValue(wrongLogin);
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("[data-test-id='action-login']").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
+        $("[data-test-id=error-notification]").shouldHave(text("Ошибка!Неверно указан логин или пароль")).shouldBe(visible);
     }
 }
