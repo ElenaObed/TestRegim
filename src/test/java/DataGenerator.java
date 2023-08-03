@@ -25,7 +25,7 @@ public class DataGenerator {
         // сам запрос
         given()
                 .spec(requestSpec)
-                .body(new RegistrationDto("vasya", "password", "active"))
+                .body(user)
                 .when()
                 .post("/api/system/users")
                 .then()
@@ -41,12 +41,16 @@ public class DataGenerator {
         String password = faker.internet().password();
         return password;
     }
+    public static class Registration {
+        private Registration(){
+        }
+    }
     public static RegistrationDto getUser(String status) {
-        RegistrationDto user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
+        var user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
         return user;
     }
     public static RegistrationDto getRegisteredUser(String status) {
-        RegistrationDto registeredUser = getUser(status);
+        var registeredUser = getUser(status);
         sendRequest(registeredUser);
         return registeredUser;
     }
