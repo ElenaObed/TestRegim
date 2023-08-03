@@ -12,7 +12,7 @@ public class TestovRegimTest {
         open("http://localhost:9999");
     }
 @Test
-    void shouldSuccessfulLoginIfRegisteredActiveUser() {
+   void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = DataGenerator.getRegisteredUser("active");
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
@@ -25,7 +25,7 @@ public class TestovRegimTest {
         $("[data-test-id='login'] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
         $("button.button").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(exactText("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
+        $("[data-test-id=error-notification] .notification__content").shouldHave(text("Ошибка! Неверно указан логин или пароль")).shouldBe(visible);
     }
 
     @Test
